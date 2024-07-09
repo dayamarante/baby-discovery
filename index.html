@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Revelação do Sexo do Bebê</title>
+    <style>
+        body,
+        html {
+            height: 100%;
+            width: 100vw;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+            transition: background-color 1s;
+            background-color: white;
+        }
+
+        #startButton {
+            padding: 40px 80px;
+            font-size: 48px;
+            cursor: pointer;
+            background-color: #60b562;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        #startButton:hover {
+            background-color: #4CAF50;
+            transform: scale(1.05);
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .baby-name {
+            background-color: white;
+            padding: 12px 24px;
+            border-radius: 21px;
+        }
+
+        .emoji {
+            font-size: 300px;
+            text-shadow: 10px 0 35px rgb(0 0 0 / 68%);
+        }
+
+        .countdown {
+            text-align: center;
+        }
+
+        .countdown h1 {
+            font-size: 36px;
+            margin: 0;
+        }
+
+        .countdown h2 {
+            font-size: 72px;
+            margin: 0;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+        }
+
+        dialog::backdrop {
+            background: 0px 2px 126px rgb(0 0 0 / 100%);
+            /* Backdrop semitransparente */
+        }
+
+        dialog {
+            border: none;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            text-align: center;
+        }
+
+        .dialog-button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .close-button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <dialog id="volumeDialog">
+        <p>Aumente o volume para ter a experiência completa!</p>
+
+        <p> Vem aí a descoberta...</p>
+        <button class="close-button" id="closeDialog">Já aumentei</button>
+    </dialog>
+
+    <button id="startButton">Iniciar Descoberta</button>
+    <script>
+        const dialog = document.getElementById('volumeDialog');
+        const closeDialogButton = document.getElementById('closeDialog');
+
+        dialog.showModal();
+
+        closeDialogButton.addEventListener('click', () => {
+            dialog.close();
+        });
+
+        let preBabySex = 'male'
+
+        let babySex = ''; // Variável para armazenar o sexo do bebê
+
+        // Precarregar arquivos de áudio
+        const beepSound = new Audio('beep.mp3');
+        const applauseSound = new Audio('applause.mp3');
+
+        // Solicitar entrada do usuário para o sexo do bebê
+        function promptSex() {
+            const userInput = prompt("Insira o sexo do bebê (m ou f):").toLowerCase();
+            if (userInput === "m") {
+                babySex = "male";
+            } else if (userInput === "f") {
+                babySex = "female";
+            } else {
+                alert("Entrada inválida! Por favor, insira 'm' ou 'f'.");
+                promptSex(); // Solicitar novamente a entrada se inválida
+            }
+        }
+
+        if (!preBabySex) {
+            promptSex(); // Chamar a função de prompt ao carregar a página
+        } else {
+            babySex = preBabySex;
+        }
+
+        const phrases = [
+            "Prepare-se!",
+            "Estamos quase lá!",
+            "A emoção está aumentando!",
+            "Falta pouco!",
+            "Segure a respiração!",
+            "Quase lá!",
+            "O momento está chegando!",
+            "Atenção!",
+            "Preparar...",
+            "Já vai!"
+        ];
+
+        document.getElementById('startButton').addEventListener('click', function () {
+            this.classList.add('hidden');
+            let countdown = 10;
+            const countdownInterval = setInterval(() => {
+                document.body.innerHTML = `
+                    <div class="countdown">
+                        <h1>${phrases[10 - countdown]}</h1>
+                        <h2>${countdown}</h2>
+                    </div>`;
+                playBeep();
+                countdown--;
+                if (countdown < 0) {
+                    clearInterval(countdownInterval);
+                    revealSex();
+                }
+            }, 1000);
+        });
+
+        function playBeep() {
+            beepSound.currentTime = 0; // Reinicia o som
+            beepSound.play();
+        }
+
+        function playApplause() {
+            applauseSound.currentTime = 0; // Reinicia o som
+            applauseSound.play();
+        }
+
+        function revealSex() {
+            let emoji = '';
+            if (babySex === "male") {
+                document.body.style.backgroundColor = '#6a93e6';
+                emoji = '👶🏻';
+            } else if (babySex === "female") {
+                document.body.style.backgroundColor = 'hotpink';
+                emoji = '👧';
+            }
+            playApplause();
+            // document.body.innerHTML = `<div class="emoji">${emoji}</div>`;
+            document.body.innerHTML = `<div class="container"><h1 class="baby-name">Enrico Amarante</h1> <img class="emoji" src="baby_light-skin-tone_1f476-1f3fb_1f3fb.png"></div>`;
+        }
+    </script>
+</body>
+
+</html>
